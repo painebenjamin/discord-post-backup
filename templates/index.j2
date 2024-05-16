@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+    </head>
+    <body>
+        <header>
+            <h1>Index</h1>
+        </header>
+        {% for channel in channels %}
+        <h2><a href="{{ channel.id }}/index.html">{{ channel.name }}</a></h2>
+        {% endfor %}
+    </body>
+</html>

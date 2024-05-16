@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ name }}</title>
+    </head>
+    <body>
+        <nav><a href="../index.html">Back to Channel List</a></nav>
+        <header>
+            <h1>{{ name }}</h1>
+        </header>
+        {% for post in posts %}
+        <article>
+            <h4>{{ post.thread_metadata.create_timestamp }}</h4>
+            <h2><a href="{{ post.id }}/index.html">{{ post.name }}</a></h2>
+            <h3>By {{ post.data.first_message.author.global_name }} ({{ post.messages | length }} message(s) in discussion)</h3>
+        </article>
+        {% if not loop.last %}<br />{% endif %}
+        {% endfor %}
+    </body>
+</html>

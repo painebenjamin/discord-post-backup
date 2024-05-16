@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ name }}</title>
+        <style>p { white-space: pre-wrap; }</style>
+    </head>
+    <body>
+        <nav><a href="../index.html">Back to Post List</a></nav>
+        <header>
+            <h1>{{ name }}</h1>
+            <h2>By {{ data.first_message.author.global_name }}</h2>
+            <h3>On {{ thread_metadata.create_timestamp }}</h3>
+        </header>
+        <section>
+            <p>{{ data.first_message.content }}</p>
+            {% for attachment in data.first_message.attachments %}
+                {% if attachment.content_type.startswith("image/") %}
+                    <a href="attachments/{{ attachment.id }}/{{ attachment.filename }}"><img src="attachments/{{ attachment.id }}/{{ attachment.filename }}" /></a>
+                {% elif attachment.content_type.startswith("video/") %}
+                    <video controls>
+                        <source src="attachments/{{ attachment.id }}/{{ attachment.filename }}" type="{{ attachment.content_type }}">
+                    </video>
+                {% elif attachment.content_type.startswith("audio/") %}
+                    <audio controls>
+                        <source src="attachments/{{ attachment.id }}/{{ attachment.filename }}" type="{{ attachment.content_type }}">
+                    </audio>
+                {% else %}
+                    <a href="attachments/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a>
+                {% endif %}
+                {% if not loop.last %}<br />{% endif %}
+            {% endfor %}
+        </section>
+        <section>
+            {% for message in messages %}
+                <h3>{{ message.author.global_name }}</g3>
+                <h4>{{ message.timestamp }}</h4>
+                <p>{{ message.content }}</p>
+                {% for attachment in message.attachments %}
+                    {% if not attachment.content_type %}
+                        <a href="attachments/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a>
+                    {% elif attachment.content_type.startswith("image/") %}
+                        <a href="attachments/{{ attachment.id }}/{{ attachment.filename }}"><img src="attachments/{{ attachment.id }}/{{ attachment.filename }}" /></a>
+                    {% elif attachment.content_type.startswith("video/") %}
+                        <video controls>
+                            <source src="attachments/{{ attachment.id }}/{{ attachment.filename }}" type="{{ attachment.content_type }}">
+                        </video>
+                    {% elif attachment.content_type.startswith("audio/") %}
+                        <audio controls>
+                            <source src="attachments/{{ attachment.id }}/{{ attachment.filename }}" type="{{ attachment.content_type }}">
+                        </audio>
+                    {% else %}
+                        <a href="attachments/{{ attachment.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a>
+                    {% endif %}
+                    {% if not loop.last %}<br />{% endif %}
+                {% endfor %}
+            {% endfor %}
+        </section>
+    </body>
+</html>
