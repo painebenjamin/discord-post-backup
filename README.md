@@ -13,7 +13,7 @@ This script does *not* require setting up an app through the Discord developer p
 ## How to Use
 
 1. Download python through your method of choice
-2. Run `pip install requirements.txt` to install prerequisites
+2. Run `pip install -r requirements.txt` to install prerequisites
 3. Open `token.txt`, enter your authentication token (see below for instructions on retrieving this.)
 4. Open `channels.txt`, enter your desired channel ID's, one per line.
 5. Run `python backup-posts.py`
